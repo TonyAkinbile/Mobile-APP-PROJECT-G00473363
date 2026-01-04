@@ -1,13 +1,25 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>recipe-details</ion-title>
+    <ion-title>Recipe Results</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recipe-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  
+  <div *ngIf="results.length === 0" class="no-results">
+    <p>No recipes found. Try different ingredients.</p>
+  </div>
+
+  <ion-list *ngIf="results.length > 0">
+    <ion-item *ngFor="let recipe of results">
+      <ion-thumbnail slot="start">
+        <img [src]="recipe.image" alt="Recipe image">
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2>{{ recipe.title }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
