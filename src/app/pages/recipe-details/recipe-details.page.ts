@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { FavouritesService } from '../../services/favourites.service';
+import { IonList, IonItem, IonThumbnail, IonLabel, IonButton, IonIcon } from '@ionic/angular/standalone';
 
 
 @Component({
@@ -11,10 +12,23 @@ import { FavouritesService } from '../../services/favourites.service';
   templateUrl: './recipe-details.page.html',
   styleUrls: ['./recipe-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    IonList,
+    IonItem,
+    IonThumbnail,
+    IonLabel,
+    IonButton,
+    IonIcon,
+    CommonModule,
+    FormsModule
+  ]
 })
 export class RecipeDetailsPage implements OnInit {
-  results: any[] = [];
+  recipe: any;
 
   constructor(private router: Router,
     private favouritesService: FavouritesService
@@ -22,7 +36,7 @@ export class RecipeDetailsPage implements OnInit {
 
   ngOnInit() {
     const nav = this.router.getCurrentNavigation();
-    this.results = nav?.extras?.state?.['results'] || [];
+    this.recipe = nav?.extras?.state?.['recipe'];
   }
 
   toggleFavourite(recipe: any) {
@@ -36,5 +50,6 @@ export class RecipeDetailsPage implements OnInit {
   isFavourite(id: number): boolean {
     return this.favouritesService.isFavourite(id);
   }
+
 
 }

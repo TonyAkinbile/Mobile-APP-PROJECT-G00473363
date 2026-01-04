@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { IonButtons, IonButton, IonIcon, IonItem, IonInput } from '@ionic/angular/standalone';
+import { IonButtons, IonButton, IonIcon, IonItem, IonInput, IonList, IonThumbnail, IonLabel } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-home',
@@ -13,15 +13,18 @@ import { IonButtons, IonButton, IonIcon, IonItem, IonInput } from '@ionic/angula
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    IonContent,
     IonHeader,
-    IonTitle,
     IonToolbar,
+    IonTitle,
+    IonContent,
     IonButtons,
     IonButton,
     IonIcon,
     IonItem,
     IonInput,
+    IonList,
+    IonThumbnail,
+    IonLabel,
     CommonModule,
     FormsModule,
     RouterModule
@@ -31,7 +34,7 @@ import { IonButtons, IonButton, IonIcon, IonItem, IonInput } from '@ionic/angula
 export class HomePage implements OnInit {
 
   ingredients: string = "";
-
+  recipes: any[] = [];
 
   constructor(
     private router: Router,
@@ -43,11 +46,27 @@ export class HomePage implements OnInit {
   ngOnInit() {
   }
   searchRecipes() {
-    this.router.navigate(['/recipe-details'], {
-      queryParams: { ingredients: this.ingredients }
-    });
+    if (!this.ingredients) {
+      return;
+    }
+
+    this.recipeService.searchRecipes(this.ingredients).subscribe(
+      (data: any) => {
+        this.recipes = data.results;
+      },
+      (error) => {
+        console.error('Error fetching recipes', error);
+      }
+    );
+
   }
 
+  openRecipe(recipe: any) {
+    this.router.navigate(
+      ['/recipe-details', recipe.id],
+      { state: { recipe } }
+    );
+  }
 
 
 

@@ -12,7 +12,7 @@ export const routes: Routes = [
       import('./pages/home/home.page').then((m) => m.HomePage),
   },
   {
-    path: 'recipe-details',
+    path: 'recipe-details/:id',
     loadComponent: () =>
       import('./pages/recipe-details/recipe-details.page').then((m) => m.RecipeDetailsPage),
   },
@@ -26,4 +26,5 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/settings/settings.page').then((m) => m.SettingsPage),
   },
+
 ];

@@ -1,25 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Recipe Results</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
-  
-  <div *ngIf="results.length === 0" class="no-results">
-    <p>No recipes found. Try different ingredients.</p>
-  </div>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Recipe Details</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-  <ion-list *ngIf="results.length > 0">
-    <ion-item *ngFor="let recipe of results">
-      <ion-thumbnail slot="start">
-        <img [src]="recipe.image" alt="Recipe image">
-      </ion-thumbnail>
+  <ion-content *ngIf="recipe">
+    <h2>{{ recipe.title }}</h2>
+    <img [src]="recipe.image" />
+  </ion-content>
 
-      <ion-label>
-        <h2>{{ recipe.title }}</h2>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-</ion-content>
