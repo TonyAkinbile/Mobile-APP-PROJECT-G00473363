@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { FavouritesService } from '../../services/favourites.service';
+
 
 @Component({
   selector: 'app-recipe-details',
@@ -14,11 +16,25 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 export class RecipeDetailsPage implements OnInit {
   results: any[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private favouritesService: FavouritesService
+  ) { }
 
   ngOnInit() {
     const nav = this.router.getCurrentNavigation();
     this.results = nav?.extras?.state?.['results'] || [];
+  }
+
+  toggleFavourite(recipe: any) {
+    if (this.favouritesService.isFavourite(recipe.id)) {
+      this.favouritesService.removeFavourite(recipe.id);
+    } else {
+      this.favouritesService.addFavourite(recipe);
+    }
+  }
+
+  isFavourite(id: number): boolean {
+    return this.favouritesService.isFavourite(id);
   }
 
 }
