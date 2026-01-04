@@ -1,3 +1,4 @@
+import { RecipeService } from '../../services/recipe.service';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -32,7 +33,11 @@ export class HomePage implements OnInit {
   ingredients: string = "";
 
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private recipeService: RecipeService
+
+  ) { }
 
 
   ngOnInit() {
