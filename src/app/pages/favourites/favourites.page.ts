@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { IonList, IonItem } from '@ionic/angular/standalone';
 import { FavouritesService } from '../../services/favourites.service';
 import { Component, OnInit } from '@angular/core';
@@ -25,17 +26,18 @@ import {
     IonLabel,
     IonButton,
     IonIcon,
-    CommonModule
+    CommonModule,
+    RouterLink
   ]
 
 })
-export class FavouritesPage implements OnInit {
+export class FavouritesPage {
   favourites: any[] = [];
 
 
   constructor(private favouritesService: FavouritesService) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.favourites = this.favouritesService.getFavourites();
   }
   removeFavourite(id: number) {

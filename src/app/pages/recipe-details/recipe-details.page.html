@@ -1,34 +1,46 @@
+<!-- Header section with a toolbar and title -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Recipe Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Content section, displayed only if the recipe data is available -->
 <ion-content class="ion-padding" *ngIf="recipe">
 
+  <!-- Recipe title -->
   <h2>{{ recipe.title }}</h2>
 
+  <!-- Recipe image -->
   <img
-  [src]="recipe.image"
-  class="recipe-image"
-/>
+    [src]="recipe.image"
+    class="recipe-image"
+  />
 
-
+  <!-- Ingredients section -->
   <h3>Ingredients</h3>
 
+  <!-- List of ingredients -->
   <ion-list>
     <ion-item *ngFor="let ing of recipe.extendedIngredients">
       <ion-label>
-        {{ ing.amount }} {{ ing.unit }} {{ ing.name }}
+        <!-- Display ingredient amount, unit (based on selected units), and name -->
+        {{ ing.amount }}
+        {{ units === 'us' ? ing.unitShort : ing.unit }}
+        {{ ing.name }}
       </ion-label>
     </ion-item>
   </ion-list>
 
+  <!-- Instructions section -->
   <h3>Instructions</h3>
 
+  <!-- Display recipe instructions as HTML content -->
   <p [innerHTML]="recipe.instructions"></p>
 
+  <!-- Button to toggle favourite status -->
   <ion-button expand="block" color="primary" (click)="toggleFavourite(recipe)">
+    <!-- Change button text based on whether the recipe is a favourite -->
     {{ isFavourite(recipe.id) ? 'Remove From Favourites' : 'Add To Favourites' }}
   </ion-button>
 

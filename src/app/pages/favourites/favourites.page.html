@@ -13,7 +13,10 @@
 
   <!-- Favourites list -->
   <ion-list *ngIf="favourites.length > 0">
-    <ion-item *ngFor="let recipe of favourites">
+
+    <ion-item
+      *ngFor="let recipe of favourites"
+      [routerLink]="['/recipe-details', recipe.id]"button>
       
       <ion-thumbnail slot="start">
         <img [src]="recipe.image" alt="Recipe image">

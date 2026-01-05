@@ -3,14 +3,17 @@
     <ion-title>G00473363</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/favourites']">
-        <ion-icon name="heart-outline"></ion-icon>
-      </ion-button>
-
-      <ion-button [routerLink]="['/settings']">
+      <ion-button routerLink="/favourites" fill="clear">
+        <ion-icon name="heart"></ion-icon>
+        
+      <ion-button routerLink="/settings" fill="clear">
         <ion-icon name="settings-outline"></ion-icon>
       </ion-button>
+    
+      
+      </ion-button>    
     </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
