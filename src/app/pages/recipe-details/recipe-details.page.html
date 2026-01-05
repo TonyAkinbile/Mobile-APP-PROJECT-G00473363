@@ -1,12 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recipe Details</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Recipe Details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" *ngIf="recipe">
 
-  <ion-content *ngIf="recipe">
-    <h2>{{ recipe.title }}</h2>
-    <img [src]="recipe.image" />
-  </ion-content>
+  <h2>{{ recipe.title }}</h2>
 
+  <img
+  [src]="recipe.image"
+  class="recipe-image"
+/>
+
+
+  <h3>Ingredients</h3>
+
+  <ion-list>
+    <ion-item *ngFor="let ing of recipe.extendedIngredients">
+      <ion-label>
+        {{ ing.amount }} {{ ing.unit }} {{ ing.name }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <h3>Instructions</h3>
+
+  <p [innerHTML]="recipe.instructions"></p>
+
+  <ion-button expand="block" color="primary" (click)="toggleFavourite(recipe)">
+    {{ isFavourite(recipe.id) ? 'Remove From Favourites' : 'Add To Favourites' }}
+  </ion-button>
+
+</ion-content>

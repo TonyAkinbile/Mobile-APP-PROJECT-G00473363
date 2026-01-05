@@ -13,3 +13,19 @@ ion-thumbnail img {
 ion-item {
     margin-bottom: 10px;
 }
+
+.recipe-image {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    /* prevents huge image*/
+    aspect-ratio: 1 / 1;
+    /* forces square */
+    object-fit: contain;
+    /* show full dish */
+    margin: 16px auto;
+    /* center horizontally */
+    background-color: #111;
+    /* subtle frame */
+    border-radius: 12px;
+}

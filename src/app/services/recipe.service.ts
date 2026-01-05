@@ -7,11 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class RecipeService {
 
-    private apiUrl = 'https://api.spoonacular.com/recipes/complexSearch';
-    private apiKey = '70759a4f7911402abcc53d3c51d3b759';  //From project brief
+    private searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
+    private detailsUrl = 'https://api.spoonacular.com/recipes';
+    private apiKey = '70759a4f7911402abcc53d3c51d3b759';
 
     constructor(private http: HttpClient) { }
 
+    // Existing: search recipes
     searchRecipes(ingredients: string): Observable<any> {
         const params = {
             query: ingredients,
@@ -19,6 +21,17 @@ export class RecipeService {
             number: 20
         };
 
-        return this.http.get(this.apiUrl, { params });
+        return this.http.get(this.searchUrl, { params });
+    }
+
+    //get recipe by ID
+    getRecipeById(id: number): Observable<any> {
+        const url = `https://api.spoonacular.com/recipes/${id}/information`;
+
+        const params = {
+            apiKey: this.apiKey
+        };
+
+        return this.http.get(url, { params });
     }
 }

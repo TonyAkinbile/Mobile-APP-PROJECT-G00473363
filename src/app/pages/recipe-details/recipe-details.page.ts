@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { RecipeService } from '../../services/recipe.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
@@ -30,13 +31,20 @@ import { IonList, IonItem, IonThumbnail, IonLabel, IonButton, IonIcon } from '@i
 export class RecipeDetailsPage implements OnInit {
   recipe: any;
 
-  constructor(private router: Router,
+  constructor(
+    private route: ActivatedRoute,
+    private recipeService: RecipeService,
     private favouritesService: FavouritesService
   ) { }
 
   ngOnInit() {
-    const nav = this.router.getCurrentNavigation();
-    this.recipe = nav?.extras?.state?.['recipe'];
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.recipeService.getRecipeById(+id).subscribe((data) => {
+        this.recipe = data;
+      });
+    }
   }
 
   toggleFavourite(recipe: any) {
